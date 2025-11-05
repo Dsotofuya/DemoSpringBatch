@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:dsfdemo
+    driverClassName: org.h2.Driver
+    username: demobatch
+    password: ${pass:demobatch}
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  batch:
+    # 'always' para que Spring Batch cree sus tablas de metadatos al iniciar.
+    # Usar 'embedded' en producción con H2/HSQLDB o 'never' con BBDD estándar.
+    jdbc:
+      initialize-schema: always
+    job:
+      # Deshabilitamos la ejecución de todos los jobs al levantar la app.
+      # Queremos control total sobre cuándo se ejecutan.
+      enabled: false
+
+# Configuración personalizada para nuestra aplicación
+app:
+  reports:
+    base-path: ./reports/
